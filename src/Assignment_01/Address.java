@@ -6,6 +6,16 @@ public class Address {
     private String city;
     private int student;
 
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", pin_code=" + pin_code +
+                ", city='" + city + '\'' +
+                ", student=" + student +
+                '}';
+    }
+
     public Address(int id, int pin_code, String city, int student) {
         this.id = id;
         this.pin_code = pin_code;

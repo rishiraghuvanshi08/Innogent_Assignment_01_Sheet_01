@@ -8,6 +8,18 @@ public class Student {
     private String gender;
     private int age;
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", class_id=" + class_id +
+                ", marks=" + marks +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
     public Student(int id, String name, int class_id, float marks, String gender, int age) {
         this.id = id;
         this.name = name;

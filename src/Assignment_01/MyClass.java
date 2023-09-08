@@ -8,6 +8,14 @@ public class MyClass {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "MyClass{" +
+                "id=" + id +
+                ", name=" + name +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

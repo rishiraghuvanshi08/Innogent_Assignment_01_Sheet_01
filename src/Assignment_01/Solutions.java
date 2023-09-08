@@ -1,7 +1,6 @@
 package Assignment_01;
 
-import Questions.Question_01;
-import Questions.Question_02;
+import Questions.*;
 
 import java.util.List;
 
@@ -22,9 +21,37 @@ public class Solutions {
         Question_02 q02 = new Question_02();
 
         List<Student> filteredStudentsQ2 = q02.findStudent(studentList, addressesList, "indore");
-        filteredStudentsQ2.stream().forEach(s -> System.out.println(s.getName()));
+        filteredStudentsQ2.stream().forEach(s -> System.out.println(s));
+
+        System.out.println();
+//        Question_03
 
         System.out.println();
 //        Get the passed students. I can pass different filters like gender, age, class, city, pincode
+        Question_04 q04 = new Question_04();
+
+        List<Student> passedStud = q04.passedStudents(studentList);
+        passedStud.stream().forEach(s -> System.out.println(s));
+
+        System.out.println();
+//        Get the failed students. I can pass different filters like gender, age, class, city, pincode
+        Question_05 q05 = new Question_05();
+
+        List<Student> failedStu = q05.failedStudents(studentList);
+        failedStu.stream().forEach(s -> System.out.println(s));
+
+        System.out.println();
+//        Find all student of class X (ex X = A).  I can pass different filters like gender, age, class, city, pincode
+        Question_06 q06 = new Question_06();
+
+        List<Student> classX = q06.class10th(studentList,classList);
+        classX.stream().forEach(s -> System.out.println(s));
+
+        System.out.println();
+//        It should fail if student record is having age > 20.
+        Question_08 q08 = new Question_08();
+
+        List<Student> failedIf20 = q08.ageGreater20(studentList);
+        failedIf20.stream().forEach(s -> System.out.println(s));
     }
 }
