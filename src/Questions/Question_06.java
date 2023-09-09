@@ -10,10 +10,10 @@ public class Question_06 {
 //    Find all student of class X (ex X = A).  I can pass different filters like gender, age, class, city, pincode
     public List<Student>  class10th(List<Student> students, List<MyClass> cls)
     {
-        List<MyClass> listClass = cls.stream().filter(c -> 'A' == c.getName()).collect(Collectors.toList());
+        List<MyClass> listClass = cls.stream().filter(c -> 'A' == c.getName()).toList();
 
-        List<Integer> id = listClass.stream().map(s -> s.getId()).collect(Collectors.toList());
+        List<Integer> id = listClass.stream().map(MyClass::getId).toList();
 
-        return students.stream().filter(s -> id.contains(s.getId())).collect(Collectors.toList());
+        return students.stream().filter(s -> id.contains(s.getClass_id())).collect(Collectors.toList());
     }
 }
