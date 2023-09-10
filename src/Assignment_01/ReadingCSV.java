@@ -1,96 +1,82 @@
 package Assignment_01;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class ReadingCSV {
-    public static void main(String[] args) {
-        String studentFilePath="C:\\Users\\chira\\IdeaProjects\\Assignment\\src\\Assignment1_6\\student.csv";
-        String addressFilePath="C:\\Users\\chira\\IdeaProjects\\Assignment\\src\\Assignment1_6\\address.csv";
-        String classFilePath="C:\\Users\\chira\\IdeaProjects\\Assignment\\src\\Assignment1_6\\class.csv";
+    static List<Student> uploadStudent(){
 
-        List<Student> students = uploadStudent(studentFilePath);
-        List<Address> addresses = uploadAddress(addressFilePath);
-        List<MyClass> classes = uploadClass(classFilePath);
-        System.out.println(students);
-        System.out.println(addresses);
-        System.out.println(classes);
-    }
-    static List<Student> uploadStudent(String filePath){
-        List<Student> students= new ArrayList<>();
-        try {
-            File file = new File(filePath);
-            Scanner scanner = new Scanner(file);
+        List<Student> students = new ArrayList<>();
+        String filePath = "src\\\\student.csv";
+        long linesCount = 1;
+        try{
+            linesCount = Files.lines(Paths.get(filePath)).count();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        if(linesCount == 1) return students;
 
-            // Skip the header line
-            if (scanner.hasNextLine()) {
-                scanner.nextLine();
-            }
-
-            // Read and process the rest of the file
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                // Process the line here (e.g., split it into fields)
-                String[] fields = line.split(",");
-                Student s1=new Student(Integer.parseInt(fields[0]),fields[1],Integer.parseInt(fields[2]),Float.parseFloat(fields[3]),fields[4],Integer.parseInt(fields[5]));
-                students.add(s1);
-            }
-            scanner.close();
-        } catch (Exception e) {
+        try{
+            students = Files.lines(Paths.get(filePath))
+                    .skip(1)
+                    .map(line -> line.split(","))
+                    .map(data -> new Student(Integer.parseInt(data[0]), data[1], Integer.parseInt(data[2]), Float.parseFloat(data[3]), data[4], Integer.parseInt(data[5])))
+                    .collect(Collectors.toList());
+        } catch (IOException e){
             e.printStackTrace();
         }
         return students;
     }
-    static List<Address> uploadAddress(String filePath){
-        List<Address> address= new ArrayList<>();
-        try {
-            File file = new File(filePath);
-            Scanner scanner = new Scanner(file);
+    static List<Address> uploadAddress(){
 
-            // Skip the header line
-            if (scanner.hasNextLine()) {
-                scanner.nextLine();
-            }
+        List<Address> address = new ArrayList<>();
+        String filePath = "src\\\\address.csv";
+        long linesCount = 1;
+        try{
+            linesCount = Files.lines(Paths.get(filePath)).count();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        if(linesCount == 1) return address;
 
-            // Read and process the rest of the file
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                // Process the line here (e.g., split it into fields)
-                String[] fields = line.split(",");
-                Address a1=new Address(Integer.parseInt(fields[0]),Integer.parseInt(fields[1]),fields[2],Integer.parseInt(fields[3]));
-                address.add(a1);
-            }
-            scanner.close();
-        } catch (Exception e) {
+        try{
+            address = Files.lines(Paths.get(filePath))
+                    .skip(1)
+                    .map(line -> line.split(","))
+                    .map(data -> new Address(Integer.parseInt(data[0]), Integer.parseInt(data[1]), data[2], Integer.parseInt(data[3])))
+                    .collect(Collectors.toList());
+        } catch (IOException e){
             e.printStackTrace();
         }
         return address;
     }
-    static List<MyClass> uploadClass(String filePath){
-        List<MyClass> students= new ArrayList<>();
-        try {
-            File file = new File(filePath);
-            Scanner scanner = new Scanner(file);
+    static List<MyClass> uploadClass(){
 
-            // Skip the header line
-            if (scanner.hasNextLine()) {
-                scanner.nextLine();
-            }
-
-            // Read and process the rest of the file
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                // Process the line here (e.g., split it into fields)
-                String[] fields = line.split(",");
-                MyClass s1=new MyClass(Integer.parseInt(fields[0]),fields[1].charAt(0));
-                students.add(s1);
-            }
-            scanner.close();
-        } catch (Exception e) {
+        List<MyClass> myClass = new ArrayList<>();
+        String filePath = "src\\\\class.csv";
+        long linesCount = 1;
+        try{
+            linesCount = Files.lines(Paths.get(filePath)).count();
+        } catch (IOException e){
             e.printStackTrace();
         }
-        return students;
+        if(linesCount == 1) return myClass;
+
+        try{
+            myClass = Files.lines(Paths.get(filePath))
+                    .skip(1)
+                    .map(line -> line.split(","))
+                    .map(data -> new MyClass(Integer.parseInt(data[0]), data[1].charAt(0)))
+                    .collect(Collectors.toList());
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return myClass;
     }
 }

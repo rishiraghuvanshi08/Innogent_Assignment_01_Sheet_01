@@ -7,16 +7,27 @@ import java.util.Map;
 
 public class Solutions {
     public static void main(String[] args) {
-        List<Student> studentList = ReadingCSV.uploadStudent("src\\student.csv");
-        List<Address> addressesList = ReadingCSV.uploadAddress("src\\address.csv");
-        List<MyClass> classList = ReadingCSV.uploadClass("src\\class.csv");
+        List<Student> studentList = ReadingCSV.uploadStudent();
+        List<Address> addressesList = ReadingCSV.uploadAddress();
+        List<MyClass> classList = ReadingCSV.uploadClass();
+
+        if (studentList.isEmpty()){
+            System.out.println("Student is Empty");
+            System.exit(1);
+        } if(addressesList.isEmpty()){
+            System.out.println("Address is Empty");
+            System.exit(1);
+        } if (classList.isEmpty()){
+            System.out.println("Class is Empty");
+            System.exit(1);
+        }
 
 //        Find all students of pincode X(ex X = 482002). I can pass different filters like gender, age, class
         System.out.println("Solution 01");
         Question_01 q01 = new Question_01();
 
         List<Student> filteredStudentsQ1 = q01.findStudent(studentList, addressesList, 452002);
-        filteredStudentsQ1.forEach(s -> System.out.println(s.getName()));
+        filteredStudentsQ1.forEach(System.out::println);
 
         System.out.println();
         System.out.println("Solution 02");
@@ -73,6 +84,27 @@ public class Solutions {
         List<Student> failedIf20 = q08.ageGreater20(studentList);
         failedIf20.forEach(System.out::println);
 
+        System.out.println();
+        System.out.println("Solution 09");
+//        I should be able to delete student. After that it should delete the respective obj from Address & Student.
+        Question_09 q09 = new Question_09();
+        int idToDelete = 7;
+        List<Student> deleted = q09.deletionFromList(studentList, idToDelete);
+        deleted.forEach(System.out::println);
+
+        // Deletion from CSV file.
+        q09.deletingFromCSV(studentList, idToDelete);
+
+        System.out.println();
+        System.out.println("Question 10");
+//        If there is no student remaining in that class. Class should also be deleted.
+        Question_10 q10 = new Question_10();
+        if(q10.deleteIfEmpty()){
+            // returns true if deleted successfully
+            System.out.println("Student.csv is deleted successfully");
+        } else {
+            System.out.println("Student.csv is not empty.");
+        }
 
     }
 }
