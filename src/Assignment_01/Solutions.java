@@ -93,7 +93,7 @@ public class Solutions {
         deleted.forEach(System.out::println);
 
         // Deletion from CSV file.
-        q09.deletingFromCSV(studentList, idToDelete);
+//        q09.deletingFromCSV(studentList, idToDelete);
 
         System.out.println();
         System.out.println("Question 10");
@@ -105,6 +105,29 @@ public class Solutions {
         } else {
             System.out.println("Student.csv is not empty.");
         }
+
+        System.out.println();
+//        I should be able to read paginated students.
+        System.out.println("Question 11");
+        Question_11 q11 = new Question_11();
+
+//        Give start and end for pagination
+        String gender = "F";
+        List<Student> paginatedFemale = q11.findFemale(studentList, 1, 9, gender);
+        System.out.println("Female List from" + 1 + " to " + 9);
+        paginatedFemale.forEach(System.out::println);
+
+        // Order by name
+        System.out.println();
+        List<Student> orderByName = q11.femaleOrderByName(studentList, 5, 8, gender);
+        System.out.println("Order By Name :");
+        orderByName.forEach(System.out::println);
+
+        // Order by marks
+        System.out.println();
+        List<Student> orderByMarks = q11.femaleOrderByName(studentList, 5, 8, gender);
+        System.out.println("Order By Marks :");
+        orderByMarks.forEach(System.out::println);
 
     }
 }
